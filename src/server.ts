@@ -3,7 +3,6 @@ import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
-import AppError from '@shared/errors/appError';
 import { errors } from 'celebrate';
 import swaggerConfig from './swagger/index';
 import { serve, setup } from 'swagger-ui-express';
@@ -34,13 +33,6 @@ app.use(errors());
 app.use('/api-docs', serve, setup(swaggerConfig));
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
-  if (error instanceof AppError) {
-    return res.status(error.statusCode).json({
-      status: 'error',
-      message: error.message,
-    });
-  }
-
   return res.status(500).json({
     status: 'error',
     message: 'Erro interno',
