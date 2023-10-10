@@ -8,6 +8,8 @@ import AppError from '@shared/errors/appError';
 import { errors } from 'celebrate';
 import swaggerConfig from './swagger/index';
 import { serve, setup } from 'swagger-ui-express';
+import newsRouter from '@modules/news/routes/News.routes';
+import categoryRouter from '@modules/category/routes/Category.routes';
 
 const app = express();
 const port = 3333;
@@ -16,13 +18,15 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(routes);
-
-app.use(errors());
-
 app.route('/').get((req: Request, res: Response) => {
   res.send({ versao: 'Api na V1' });
 });
+
+routes.use('/news', newsRouter);
+
+routes.use('/category', categoryRouter);
+
+app.use(errors());
 
 app.use('/api-docs', serve, setup(swaggerConfig));
 
