@@ -6,8 +6,8 @@ import cors from 'cors';
 import { errors } from 'celebrate';
 import swaggerConfig from './swagger/index';
 import { serve, setup } from 'swagger-ui-express';
-import newsRouter from '@modules/news/routes/News.routes';
-import categoryRouter from '@modules/category/routes/Category.routes';
+import newsRouter from './modules/news/routes/News.routes';
+import categoryRouter from './modules/category/routes/Category.routes';
 
 import { Router } from 'express';
 
