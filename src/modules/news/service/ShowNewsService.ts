@@ -1,4 +1,4 @@
-import { News, PrismaClient } from '@prisma/client';
+import { PrismaClient, News } from '@prisma/client';
 import AppError from '../../../shared/errors/appError';
 
 const prisma = new PrismaClient();
@@ -8,10 +8,13 @@ interface IRequest {
 }
 
 export default class ShowNewsService {
-  public async execute({ id }: IRequest): Promise<News[]> {
+  public async execute({ id }: IRequest): Promise<News | null> {
     const news = await prisma.news.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        categories: true,
       },
     });
 
@@ -19,6 +22,6 @@ export default class ShowNewsService {
       throw new AppError('Notícia não encontrada');
     }
 
-    return [news];
+    return news;
   }
 }
