@@ -3,13 +3,16 @@ import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
-import routes from './shared/http/routes';
 import AppError from '@shared/errors/appError';
 import { errors } from 'celebrate';
 import swaggerConfig from './swagger/index';
 import { serve, setup } from 'swagger-ui-express';
 import newsRouter from '@modules/news/routes/News.routes';
 import categoryRouter from '@modules/category/routes/Category.routes';
+
+import { Router } from 'express';
+
+const routes = Router();
 
 const app = express();
 const port = 3333;
