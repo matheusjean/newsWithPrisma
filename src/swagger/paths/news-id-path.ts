@@ -45,7 +45,7 @@ export const newsIdPath = {
       },
     },
   },
-  patch: {
+  put: {
     tags: ['News'],
     summary: 'Atualiza uma notícia',
     description: 'Atualiza uma notícia de acordo com o Id salvo no ms News.',
