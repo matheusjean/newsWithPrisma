@@ -10,7 +10,6 @@ interface IRequest {
 
 export default class UpdateCategoryService {
   public async execute({ id, name }: IRequest): Promise<Category> {
-    // Verifica se a categoria existe
     const existingCategory = await prisma.category.findUnique({
       where: {
         id: id,
@@ -21,7 +20,6 @@ export default class UpdateCategoryService {
       throw new AppError('Categoria não encontrada');
     }
 
-    // Verifica se já existe uma categoria com o mesmo nome
     const categoryWithSameName = await prisma.category.findFirst({
       where: {
         name: name,
@@ -35,7 +33,6 @@ export default class UpdateCategoryService {
       throw new AppError('Já existe uma categoria com esse nome');
     }
 
-    // Atualiza o nome da categoria
     const updatedCategory = await prisma.category.update({
       where: {
         id: id,

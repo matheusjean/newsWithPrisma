@@ -29,9 +29,8 @@ export default class CategoryController {
     req: Request,
     res: Response,
   ): Promise<Response> {
-    const { name } = req.params; // Obtenha o nome da categoria da solicitação
+    const { name } = req.params;
 
-    // Chame o serviço para buscar notícias por categoria
     const newsByCategory = await FindNewsByCategoryService.execute({ name });
 
     return res.json(newsByCategory);

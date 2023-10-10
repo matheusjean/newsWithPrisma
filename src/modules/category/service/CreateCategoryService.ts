@@ -25,7 +25,6 @@ export default class CreateCategoryService {
       throw new AppError('Já existe uma categoria com esse nome');
     }
 
-    // Cria a categoria sem definir manualmente o campo "id"
     const createdCategory = await prisma.category.create({
       data: {
         name: name,

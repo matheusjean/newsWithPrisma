@@ -9,7 +9,6 @@ interface IRequest {
 
 export default class DeleteCategoryService {
   public async execute({ id }: IRequest): Promise<void> {
-    // Verifica se a categoria existe
     const category = await prisma.category.findUnique({
       where: {
         id: id,
@@ -20,7 +19,6 @@ export default class DeleteCategoryService {
       throw new AppError('Categoria não encontrada');
     }
 
-    // Remove a categoria
     await prisma.category.delete({
       where: {
         id: id,

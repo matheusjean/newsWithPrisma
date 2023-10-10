@@ -12,7 +12,7 @@ interface IRequest {
   image: string;
   link: string;
   isActive: boolean;
-  categoryIds?: string[]; // Adicione os IDs das categorias
+  categoryIds?: string[];
 }
 
 export default class UpdateNewsService {
@@ -27,13 +27,12 @@ export default class UpdateNewsService {
     isActive,
     categoryIds,
   }: IRequest): Promise<News> {
-    // Verifica se a notícia existe
     const news = await prisma.news.findUnique({
       where: {
         id: id,
       },
       include: {
-        categories: true, // Inclua as categorias associadas à notícia
+        categories: true,
       },
     });
 
@@ -41,7 +40,6 @@ export default class UpdateNewsService {
       throw new AppError('Notícia não encontrada');
     }
 
-    // Verifica se já existe uma notícia com o mesmo "hat"
     const newsWithSameHat = await prisma.news.findFirst({
       where: {
         hat: hat,
@@ -55,7 +53,6 @@ export default class UpdateNewsService {
       throw new AppError('Já existe uma notícia com esse nome');
     }
 
-    // Atualiza os campos da notícia
     const updatedNews = await prisma.news.update({
       where: {
         id: id,

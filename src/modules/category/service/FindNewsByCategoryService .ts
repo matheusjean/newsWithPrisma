@@ -8,7 +8,6 @@ interface IRequest {
 
 class FindNewsByCategoryService {
   public static async execute({ name }: IRequest): Promise<News[]> {
-    // Use o Prisma para buscar notícias por categoria
     const news = await prisma.news.findMany({
       where: {
         categories: {
