@@ -1,5 +1,5 @@
 import { News, PrismaClient } from '@prisma/client';
-import AppError from '@shared/errors/appError';
+import AppError from '../../../shared/errors/appError';
 
 const prisma = new PrismaClient();
 

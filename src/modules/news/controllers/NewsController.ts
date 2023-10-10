@@ -5,7 +5,7 @@ import ListNewsService from '../service/ListNewsService';
 import ShowNewsService from '../service/ShowNewsService';
 import UpdateNewsService from '../service/UpdateNewsService';
 import ShowHatNewsService from '../service/ShowHatNewsService';
-import AppError from '@shared/errors/appError';
+import AppError from '../../../shared/errors/appError';
 
 export default class NewsController {
   public async index(req: Request, res: Response): Promise<Response> {
