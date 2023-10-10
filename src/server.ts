@@ -3,11 +3,10 @@ import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
-import routes from './routes';
+import routes from './shared/http/routes';
 import AppError from '@shared/errors/appError';
-import '@shared/typeorm';
 import { errors } from 'celebrate';
-import swaggerConfig from '../../swagger/index';
+import swaggerConfig from './swagger/index';
 import { serve, setup } from 'swagger-ui-express';
 
 const app = express();
