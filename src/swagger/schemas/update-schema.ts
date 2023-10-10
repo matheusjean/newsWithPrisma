@@ -22,5 +22,17 @@ export const UpdateNewsUseCase = {
     isActive: {
       type: 'boolean',
     },
+    categoryIds: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+    categoriesToRemove: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
   },
 };
