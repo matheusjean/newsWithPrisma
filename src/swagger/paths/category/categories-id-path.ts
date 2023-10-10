@@ -45,7 +45,7 @@ export const categoriesIdPath = {
       },
     },
   },
-  patch: {
+  put: {
     tags: ['Category'],
     summary: 'Atualiza uma categoria',
     description: 'Atualiza uma categoria de acordo com o Id salvo no ms News.',
