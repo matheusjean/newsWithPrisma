@@ -2,7 +2,7 @@ export const newsPath = {
   post: {
     tags: ['News'],
     summary: 'Cria uma notícia',
-    description: 'Cria um notícia no banco de dados à partir do payload',
+    description: 'Cria uma notícia no banco de dados',
     requestBody: {
       content: {
         'application/json': {
@@ -39,8 +39,8 @@ export const newsPath = {
   },
   get: {
     tags: ['News'],
-    summary: 'Retorna os dados de varias notícias.',
-    description: 'Retorna os dados de varias notícias.',
+    summary: 'Retorna os dados de várias notícias.',
+    description: 'Retorna os dados de várias notícias.',
     parameters: [
       {
         in: 'query',
@@ -61,7 +61,7 @@ export const newsPath = {
         },
       },
       {
-        in: 'header',
+        in: 'query',
         name: 'text',
         description: 'Text',
         required: false,
@@ -70,7 +70,7 @@ export const newsPath = {
         },
       },
       {
-        in: 'header',
+        in: 'query',
         name: 'author',
         description: 'Author',
         required: false,
@@ -79,7 +79,7 @@ export const newsPath = {
         },
       },
       {
-        in: 'header',
+        in: 'query',
         name: 'image',
         description: 'Image',
         required: false,
@@ -88,7 +88,7 @@ export const newsPath = {
         },
       },
       {
-        in: 'header',
+        in: 'query',
         name: 'link',
         description: 'Link',
         required: false,
@@ -97,7 +97,7 @@ export const newsPath = {
         },
       },
       {
-        in: 'header',
+        in: 'query',
         name: 'isActive',
         description: 'isActive',
         required: false,
@@ -106,7 +106,7 @@ export const newsPath = {
         },
       },
       {
-        in: 'header',
+        in: 'query',
         name: 'created_at',
         description: 'created_at',
         required: false,
@@ -121,7 +121,18 @@ export const newsPath = {
         content: {
           'application/json': {
             schema: {
-              oneOf: [{ $ref: '#/schemas/NewsUseCase' }, { type: 'array', items: {} }],
+              type: 'array',
+              items: {
+                $ref: '#/schemas/NewsUseCase',
+                properties: {
+                  categories: {
+                    type: 'array',
+                    items: {
+                      $ref: '#/schemas/Category',
+                    },
+                  },
+                },
+              },
             },
           },
         },
@@ -137,6 +148,60 @@ export const newsPath = {
       },
       500: {
         $ref: '#/components/serverError',
+      },
+    },
+  },
+
+  '/news/by-hat/{hat}': {
+    get: {
+      tags: ['News'],
+      summary: 'Retorna os dados de notícias por categoria.',
+      description: 'Retorna os dados de notícias por categoria.',
+      parameters: [
+        {
+          in: 'path',
+          name: 'hat',
+          description: 'Hat',
+          required: true,
+          schema: {
+            type: 'string',
+          },
+        },
+      ],
+      responses: {
+        200: {
+          description: 'Sucesso',
+          content: {
+            'application/json': {
+              schema: {
+                type: 'array',
+                items: {
+                  $ref: '#/schemas/NewsUseCase',
+                  properties: {
+                    categories: {
+                      type: 'array',
+                      items: {
+                        $ref: '#/schemas/Category',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        400: {
+          $ref: '#/components/badRequest',
+        },
+        401: {
+          $ref: '#/components/unauthorized',
+        },
+        404: {
+          $ref: '#/components/notFound',
+        },
+        500: {
+          $ref: '#/components/serverError',
+        },
       },
     },
   },

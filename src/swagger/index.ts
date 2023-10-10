@@ -8,15 +8,6 @@ export default {
     title: 'News Service',
     description: 'Essa é a documentação da API de notícias.',
     version: '1.0.0',
-    contact: {
-      name: '',
-      email: '',
-      url: '',
-    },
-    license: {
-      name: '',
-      url: '',
-    },
   },
   tags: [
     {
@@ -25,7 +16,7 @@ export default {
     },
     {
       name: 'Category',
-      description: 'API relacionada as categorias',
+      description: 'API relacionada as categorias das notícias',
     },
   ],
   paths,
