@@ -55,9 +55,16 @@ export default class UpdateNewsService {
       }
     }
 
-    // Remove as categorias especificadas
     if (categoriesToRemove) {
-      const categoryIdsToRemove = categoriesToRemove; // Remover as categorias diretamente
+      const allCategoriesExist = categoriesToRemove.every((categoryId) =>
+        news.categories.some((category) => category.id === categoryId),
+      );
+
+      if (!allCategoriesExist) {
+        throw new AppError('Está categoria não existen nesta notícia.');
+      }
+
+      const categoryIdsToRemove = categoriesToRemove;
 
       await prisma.news.update({
         where: {
@@ -72,7 +79,6 @@ export default class UpdateNewsService {
         },
       });
     }
-
     const updatedNews = await prisma.news.update({
       where: {
         id: id,
