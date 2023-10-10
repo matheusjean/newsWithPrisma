@@ -3,7 +3,13 @@
   "builds": [
     {
       "src": "src/server.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "env": {
+          "DATABASE_URL": "postgres://default:1iGELPFehtY9@ep-square-flower-32239723-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb"
+        },
+        "command": "yarn build && prisma generate"
+      }
     }
   ],
   "routes": [
