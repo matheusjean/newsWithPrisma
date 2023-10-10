@@ -55,6 +55,7 @@ newsRouter.put(
       link: Joi.string(),
       isActive: Joi.boolean(),
       categoryIds: Joi.array().items(Joi.string()),
+      categoriesToRemove: Joi.array().items(Joi.string()),
     },
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
@@ -62,7 +63,6 @@ newsRouter.put(
   }),
   newsController.update,
 );
-
 newsRouter.delete(
   '/:id',
   celebrate({

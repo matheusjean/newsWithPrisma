@@ -13,6 +13,7 @@ interface IRequest {
   link: string;
   isActive: boolean;
   categoryIds?: string[];
+  categoriesToRemove?: string[];
 }
 
 export default class UpdateNewsService {
@@ -26,6 +27,7 @@ export default class UpdateNewsService {
     link,
     isActive,
     categoryIds,
+    categoriesToRemove,
   }: IRequest): Promise<News> {
     const news = await prisma.news.findUnique({
       where: {
@@ -40,17 +42,35 @@ export default class UpdateNewsService {
       throw new AppError('Notícia não encontrada');
     }
 
-    const newsWithSameHat = await prisma.news.findFirst({
-      where: {
-        hat: hat,
-        NOT: {
+    if (categoryIds) {
+      const existingCategoryIds = news.categories.map(
+        (category) => category.id,
+      );
+      const duplicateCategories = categoryIds.filter((categoryId) =>
+        existingCategoryIds.includes(categoryId),
+      );
+
+      if (duplicateCategories.length > 0) {
+        throw new AppError('Esta categoria já está associada a esta notícia.');
+      }
+    }
+
+    // Remove as categorias especificadas
+    if (categoriesToRemove) {
+      const categoryIdsToRemove = categoriesToRemove; // Remover as categorias diretamente
+
+      await prisma.news.update({
+        where: {
           id: id,
         },
-      },
-    });
-
-    if (newsWithSameHat) {
-      throw new AppError('Já existe uma notícia com esse nome');
+        data: {
+          categories: {
+            disconnect: categoryIdsToRemove.map((categoryId) => ({
+              id: categoryId,
+            })),
+          },
+        },
+      });
     }
 
     const updatedNews = await prisma.news.update({

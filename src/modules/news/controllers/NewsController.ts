@@ -68,8 +68,17 @@ export default class NewsController {
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { hat, title, text, author, image, link, isActive, categoryIds } =
-      req.body;
+    const {
+      hat,
+      title,
+      text,
+      author,
+      image,
+      link,
+      isActive,
+      categoryIds,
+      categoriesToRemove,
+    } = req.body;
     const { id } = req.params;
 
     const updateNews = new UpdateNewsService();
@@ -84,6 +93,7 @@ export default class NewsController {
       link,
       isActive,
       categoryIds,
+      categoriesToRemove,
     });
 
     return res.json(news);
