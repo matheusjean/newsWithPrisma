@@ -56,14 +56,16 @@ export default class CategoryController {
 
   public async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, isActive } = req.body;
 
     const updateCategory = new UpdateCategoryService();
 
     const category = await updateCategory.execute({
       id,
       name,
+      isActive,
     });
+
     return res.json(category);
   }
 
