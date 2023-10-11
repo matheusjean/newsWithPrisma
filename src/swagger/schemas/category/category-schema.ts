@@ -1,7 +1,6 @@
 export const GetCategoryIdUseCase = {
-  type: 'array',
+  type: 'object',
   items: {
-    type: 'object',
     properties: {
       id: {
         type: 'string',

@@ -48,7 +48,7 @@ export const newsIdPath = {
   put: {
     tags: ['News'],
     summary: 'Atualiza uma notícia',
-    description: 'Atualiza uma notícia de acordo com o Id salvo no ms News.',
+    description: 'Atualiza uma notícia de acordo com o ID.',
     parameters: [
       {
         in: 'path',
