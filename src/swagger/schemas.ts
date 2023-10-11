@@ -9,6 +9,7 @@ import { GetCategoryIdUseCase } from './schemas/category/category-schema';
 import { PostCategoryUseCase } from './schemas/category/post-category-schema';
 import { PostCategoryIdUseCase } from './schemas/category/post-schema';
 import { UpdateCategoryUseCase } from './schemas/category/update-category-schema';
+import { GetNewsByCategoryUseCase } from './schemas/news-category-schema';
 
 export default {
   NewsUseCase,
@@ -22,4 +23,5 @@ export default {
   PostCategoryUseCase,
   PostCategoryIdUseCase,
   UpdateCategoryUseCase,
+  GetNewsByCategoryUseCase,
 };
