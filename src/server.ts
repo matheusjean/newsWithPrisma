@@ -20,11 +20,11 @@ app.use(routes);
 
 app.use(errors());
 
+app.use('/api-docs', serve, setup(swaggerConfig));
+
 app.route('/').get((req: Request, res: Response) => {
   res.send({ versao: 'Api na V1' });
 });
-
-app.use('/api-docs', serve, setup(swaggerConfig));
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof AppError) {
