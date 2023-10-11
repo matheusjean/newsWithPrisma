@@ -1,3 +1,4 @@
+import { newsBycategoriesIdPath } from './paths/category/news-by-category-path';
 import {
   newsIdPath,
   newsPath,
@@ -12,4 +13,5 @@ export default {
   '/news/by-hat/{hat}': newsByHatPath,
   '/category': categoryPath,
   '/category/{id}': categoriesIdPath,
+  '/category/by-category/{name}': newsBycategoriesIdPath,
 };
