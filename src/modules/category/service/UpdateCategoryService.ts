@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 interface IRequest {
   id: string;
   name: string;
-  isActive: boolean; // Adicione a propriedade isActive
+  isActive: boolean;
 }
 
 export default class UpdateCategoryService {
@@ -22,7 +22,6 @@ export default class UpdateCategoryService {
     }
 
     if (name) {
-      // Verificar se o novo nome já existe
       const categoryWithSameName = await prisma.category.findFirst({
         where: {
           name: name,
@@ -37,14 +36,14 @@ export default class UpdateCategoryService {
       }
     }
 
-    const updateData: Record<string, any> = {}; // Inicialize um objeto de atualização vazio
+    const updateData: Record<string, any> = {};
 
     if (name) {
-      updateData.name = name; // Atualize o nome se fornecido
+      updateData.name = name;
     }
 
     if (isActive !== undefined) {
-      updateData.isActive = isActive; // Atualize isActive se fornecido
+      updateData.isActive = isActive;
     }
 
     const updatedCategory = await prisma.category.update({

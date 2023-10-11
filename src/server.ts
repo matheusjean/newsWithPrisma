@@ -12,9 +12,6 @@ import { serve, setup } from 'swagger-ui-express';
 const app = express();
 const port = 3333;
 
-const CSS_URL =
-  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
-
 app.use(cors());
 
 app.use(express.json());
@@ -23,7 +20,7 @@ app.use(routes);
 
 app.use(errors());
 
-app.use('/api-docs', serve, setup(swaggerConfig, { customCssUrl: CSS_URL }));
+app.use('/api-docs', serve, setup(swaggerConfig));
 
 app.route('/').get((req: Request, res: Response) => {
   res.send({ versao: 'Api na V1' });
