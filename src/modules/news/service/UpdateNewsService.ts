@@ -50,9 +50,9 @@ export default class UpdateNewsService {
         existingCategoryIds.includes(categoryId),
       );
 
-      if (duplicateCategories.length > 0) {
-        throw new AppError('Esta categoria já está associada a esta notícia.');
-      }
+      // if (duplicateCategories.length > 0) {
+      //   throw new AppError('Esta categoria já está associada a esta notícia.');
+      // }
     }
 
     if (categoriesToRemove) {
