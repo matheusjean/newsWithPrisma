@@ -1,4 +1,4 @@
-import { News, PrismaClient } from '@prisma/client';
+import { Category, News, PrismaClient } from '@prisma/client';
 import AppError from '../../../shared/errors/appError';
 
 const prisma = new PrismaClient();
@@ -50,8 +50,11 @@ export default class UpdateNewsService {
     }
 
     if (categoriesToRemove) {
-      const allCategoriesExist = categoriesToRemove.every((categoryId) =>
-        news.categories.some((category): any => category.id === categoryId),
+      const allCategoriesExist = categoriesToRemove.every(
+        (categoryId: string) =>
+          news.categories.some(
+            (category: Category) => category.id === categoryId,
+          ),
       );
 
       if (!allCategoriesExist) {
