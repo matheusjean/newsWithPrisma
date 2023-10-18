@@ -47,10 +47,6 @@ export default class UpdateNewsService {
       const duplicateCategories = categoryIds.filter((categoryId) =>
         existingCategoryIds.includes(categoryId),
       );
-
-      if (duplicateCategories.length > 0) {
-        throw new AppError('Categorias duplicadas não são permitidas');
-      }
     }
 
     if (categoriesToRemove) {
@@ -59,7 +55,7 @@ export default class UpdateNewsService {
       );
 
       if (!allCategoriesExist) {
-        throw new AppError('Está categoria não existen nesta notícia.');
+        throw new AppError('Está categoria não existe nesta notícia.');
       }
 
       const categoryIdsToRemove = categoriesToRemove;
@@ -92,9 +88,6 @@ export default class UpdateNewsService {
         categories: {
           connect: categoryIds?.map((categoryId) => ({ id: categoryId })) || [],
         },
-      },
-      include: {
-        categories: true,
       },
     });
 
