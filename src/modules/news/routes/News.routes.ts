@@ -44,25 +44,25 @@ newsRouter.post(
   newsController.create,
 );
 
-newsRouter.put(
-  '/:id',
-  celebrate({
-    [Segments.BODY]: {
-      hat: Joi.string(),
-      title: Joi.string(),
-      text: Joi.string(),
-      image: Joi.string(),
-      link: Joi.string(),
-      isActive: Joi.boolean(),
-      categoryIds: Joi.array().items(Joi.string()),
-      categoriesToRemove: Joi.array().items(Joi.string()),
-    },
-    [Segments.PARAMS]: {
-      id: Joi.string().uuid().required(),
-    },
-  }),
-  newsController.update,
-);
+// newsRouter.put(
+//   '/:id',
+//   celebrate({
+//     [Segments.BODY]: {
+//       hat: Joi.string(),
+//       title: Joi.string(),
+//       text: Joi.string(),
+//       image: Joi.string(),
+//       link: Joi.string(),
+//       isActive: Joi.boolean(),
+//       categoryIds: Joi.array().items(Joi.string()),
+//       categoriesToRemove: Joi.array().items(Joi.string()),
+//     },
+//     [Segments.PARAMS]: {
+//       id: Joi.string().uuid().required(),
+//     },
+//   }),
+//   newsController.update,
+// );
 newsRouter.delete(
   '/:id',
   celebrate({
