@@ -51,7 +51,6 @@ newsRouter.put(
       hat: Joi.string(),
       title: Joi.string(),
       text: Joi.string(),
-      author: Joi.string(),
       image: Joi.string(),
       link: Joi.string(),
       isActive: Joi.boolean(),
