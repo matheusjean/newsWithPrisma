@@ -42,16 +42,16 @@ export default class UpdateNewsService {
 
     if (categoryIds) {
       const existingCategoryIds = news.categories.map(
-        (category) => category.id,
+        (category: any) => category.id,
       );
-      const duplicateCategories = categoryIds.filter((categoryId) =>
+      const duplicateCategories = categoryIds.filter((categoryId): any =>
         existingCategoryIds.includes(categoryId),
       );
     }
 
     if (categoriesToRemove) {
       const allCategoriesExist = categoriesToRemove.every((categoryId) =>
-        news.categories.some((category) => category.id === categoryId),
+        news.categories.some((category): any => category.id === categoryId),
       );
 
       if (!allCategoriesExist) {
@@ -66,7 +66,7 @@ export default class UpdateNewsService {
         },
         data: {
           categories: {
-            disconnect: categoryIdsToRemove.map((categoryId) => ({
+            disconnect: categoryIdsToRemove.map((categoryId): any => ({
               id: categoryId,
             })),
           },
