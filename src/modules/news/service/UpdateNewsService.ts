@@ -8,7 +8,6 @@ interface IRequest {
   hat: string;
   title: string;
   text: string;
-  author: string;
   image: string;
   link: string;
   isActive: boolean;
@@ -22,7 +21,6 @@ export default class UpdateNewsService {
     hat,
     title,
     text,
-    author,
     image,
     link,
     isActive,
@@ -50,9 +48,9 @@ export default class UpdateNewsService {
         existingCategoryIds.includes(categoryId),
       );
 
-      // if (duplicateCategories.length > 0) {
-      //   throw new AppError('Esta categoria já está associada a esta notícia.');
-      // }
+      if (duplicateCategories.length > 0) {
+        throw new AppError('Categorias duplicadas não são permitidas');
+      }
     }
 
     if (categoriesToRemove) {
@@ -79,6 +77,7 @@ export default class UpdateNewsService {
         },
       });
     }
+
     const updatedNews = await prisma.news.update({
       where: {
         id: id,
@@ -87,7 +86,6 @@ export default class UpdateNewsService {
         hat: hat,
         title: title,
         text: text,
-        author: author,
         image: image,
         link: link,
         isActive: isActive,
