@@ -7,7 +7,7 @@ interface IRequest {
   hat: string;
   title: string;
   text: string;
-  author: string;
+  userId: string;
   image: string;
   link: string;
   isActive: boolean;
@@ -19,7 +19,7 @@ export default class CreateNewsService {
     hat,
     title,
     text,
-    author,
+    userId,
     image,
     link,
     isActive,
@@ -40,7 +40,9 @@ export default class CreateNewsService {
         hat,
         title,
         text,
-        author,
+        author: {
+          connect: { id: userId },
+        },
         image,
         link,
         isActive,
@@ -50,9 +52,9 @@ export default class CreateNewsService {
       },
       include: {
         categories: true,
+        author: true,
       },
     });
-
     return createdNews;
   }
 }
