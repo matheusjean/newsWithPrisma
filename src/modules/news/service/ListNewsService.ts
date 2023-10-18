@@ -7,6 +7,13 @@ export default class ListNewsService {
     const news = await prisma.news.findMany({
       include: {
         categories: true,
+        author: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+          },
+        },
       },
     });
 
