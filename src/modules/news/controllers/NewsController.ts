@@ -43,8 +43,13 @@ export default class NewsController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { hat, title, text, author, image, link, isActive, categoryIds } =
-      req.body;
+    const { hat, title, text, image, link, isActive, categoryIds } = req.body;
+
+    const userId = req.user.id;
+
+    if (!userId) {
+      return res.status(400).json({ error: 'Usuário não encontrado' });
+    }
 
     const createNews = new CreateNewsService();
 
@@ -53,7 +58,7 @@ export default class NewsController {
         hat,
         title,
         text,
-        author,
+        userId,
         image,
         link,
         isActive,
@@ -63,7 +68,7 @@ export default class NewsController {
       return res.json(news);
     } catch (error) {
       console.error('Erro ao criar notícia:', error);
-      throw new AppError('Erro ao criar notícia', 400);
+      return res.status(400).json({ error: 'Erro ao criar notícia' });
     }
   }
 
