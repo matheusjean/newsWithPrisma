@@ -77,7 +77,6 @@ export default class NewsController {
       hat,
       title,
       text,
-      author,
       image,
       link,
       isActive,
@@ -88,20 +87,23 @@ export default class NewsController {
 
     const updateNews = new UpdateNewsService();
 
-    const news = await updateNews.execute({
-      id,
-      hat,
-      title,
-      text,
-      author,
-      image,
-      link,
-      isActive,
-      categoryIds,
-      categoriesToRemove,
-    });
+    try {
+      const news = await updateNews.execute({
+        id,
+        hat,
+        title,
+        text,
+        image,
+        link,
+        isActive,
+        categoryIds,
+        categoriesToRemove,
+      });
 
-    return res.json(news);
+      return res.json(news);
+    } catch (error) {
+      return res.status(400).json({ error: 'Erro ao atualizar notícia' });
+    }
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
