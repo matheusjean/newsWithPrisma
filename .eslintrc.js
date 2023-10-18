@@ -21,5 +21,6 @@ module.exports = {
     "no-console": "off",
     "prettier/prettier": "off",
     "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-explicit-any": 0
   }
 }
