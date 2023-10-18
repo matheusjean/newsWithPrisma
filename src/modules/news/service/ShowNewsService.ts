@@ -15,6 +15,13 @@ export default class ShowNewsService {
       },
       include: {
         categories: true,
+        author: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+          },
+        },
       },
     });
 
