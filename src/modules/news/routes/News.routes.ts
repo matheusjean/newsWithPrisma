@@ -1,6 +1,7 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import NewsController from '../controllers/NewsController';
+import authenticateUser from '@config/middleware/auth2';
 
 const newsRouter = Router();
 const newsController = new NewsController();
@@ -28,12 +29,12 @@ newsRouter.get(
 );
 newsRouter.post(
   '/',
+  authenticateUser,
   celebrate({
     [Segments.BODY]: {
       hat: Joi.string().required(),
       title: Joi.string().required(),
       text: Joi.string().required(),
-      author: Joi.string().required(),
       image: Joi.string().required(),
       link: Joi.string().required(),
       isActive: Joi.boolean().required(),
