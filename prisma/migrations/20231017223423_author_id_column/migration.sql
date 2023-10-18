@@ -12,7 +12,7 @@ ALTER TABLE "_NewsToUser" DROP CONSTRAINT "_NewsToUser_A_fkey";
 ALTER TABLE "_NewsToUser" DROP CONSTRAINT "_NewsToUser_B_fkey";
 
 -- AlterTable
-ALTER TABLE "News" ADD COLUMN     "authorId" TEXT;
+ALTER TABLE "News" ADD COLUMN     "authorId" TEXT NOT NULL;
 
 -- DropTable
 DROP TABLE "_NewsToUser";
