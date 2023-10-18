@@ -4,21 +4,22 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 model News {
   id         String      @id @default(uuid()) @map("id")
   title      String
   hat        String
   text       String
-  author     String
+  author     User        @relation(fields: [authorId], references: [id])
+  authorId   String
   image      String
   link       String
   isActive   Boolean
   created_at DateTime    @default(now()) @map("created_at")
   updated_at DateTime    @updatedAt @map("updated_at")
-  categories Category[]
+  categories  Category[]
 }
 
 model Category {
@@ -28,4 +29,12 @@ model Category {
   created_at DateTime    @default(now()) @map("created_at")
   updated_at DateTime    @updatedAt @map("updated_at")
   news       News[]
+}
+
+model User {
+  id        String     @id @default(uuid()) @map("id")
+  username  String
+  email     String     @unique
+  password  String
+  news      News[]     
 }
