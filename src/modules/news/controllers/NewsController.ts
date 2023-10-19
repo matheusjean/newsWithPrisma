@@ -3,9 +3,8 @@ import CreateNewsService from '../service/CreateNewsService';
 import DeleteNewsService from '../service/DeleteNewsService';
 import ListNewsService from '../service/ListNewsService';
 import ShowNewsService from '../service/ShowNewsService';
-// import UpdateNewsService from '../service/UpdateNewsService';
 import ShowHatNewsService from '../service/ShowHatNewsService';
-import AppError from '../../../shared/errors/appError';
+import UpdateNewsService from '../service/UpdateNewsService';
 
 export default class NewsController {
   public async index(req: Request, res: Response): Promise<Response> {
@@ -72,39 +71,39 @@ export default class NewsController {
     }
   }
 
-  // public async update(req: Request, res: Response): Promise<Response> {
-  //   const {
-  //     hat,
-  //     title,
-  //     text,
-  //     image,
-  //     link,
-  //     isActive,
-  //     categoryIds,
-  //     categoriesToRemove,
-  //   } = req.body;
-  //   const { id } = req.params;
+  public async update(req: Request, res: Response): Promise<Response> {
+    const {
+      hat,
+      title,
+      text,
+      image,
+      link,
+      isActive,
+      categoryIds,
+      categoriesToRemove,
+    } = req.body;
+    const { id } = req.params;
 
-  //   const updateNews = new UpdateNewsService();
+    const updateNews = new UpdateNewsService();
 
-  //   try {
-  //     const news = await updateNews.execute({
-  //       id,
-  //       hat,
-  //       title,
-  //       text,
-  //       image,
-  //       link,
-  //       isActive,
-  //       categoryIds,
-  //       categoriesToRemove,
-  //     });
+    try {
+      const news = await updateNews.execute({
+        id,
+        hat,
+        title,
+        text,
+        image,
+        link,
+        isActive,
+        categoryIds,
+        categoriesToRemove,
+      });
 
-  //     return res.json(news);
-  //   } catch (error) {
-  //     return res.status(400).json({ error: 'Erro ao atualizar notícia' });
-  //   }
-  // }
+      return res.json(news);
+    } catch (error) {
+      return res.status(400).json({ error: 'Erro ao atualizar notícia' });
+    }
+  }
 
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
