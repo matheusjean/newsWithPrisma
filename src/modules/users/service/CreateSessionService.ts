@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client/edge';
+import { PrismaClient, User } from '@prisma/client';
 import AppError from '../../../shared/errors/appError';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
@@ -23,13 +23,13 @@ class CreateSessionsService {
     });
 
     if (!user) {
-      throw new AppError('E-mail ou senha incorretos!', 401);
+      throw new AppError('E-mail não encontrado', 401);
     }
 
     const passwordConfirmed = await compare(password, user.password);
 
     if (!passwordConfirmed) {
-      throw new AppError('E-mail ou senha incorretos!', 401);
+      throw new AppError('Senha incorreta', 401);
     }
 
     const token = sign(
