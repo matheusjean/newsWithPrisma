@@ -9,12 +9,32 @@ class FindUserByUsernameService {
         where: {
           username,
         },
-        include: {
-          news: true,
+        select: {
+          id: true,
+          email: true,
+          username: true,
         },
       });
 
-      return user;
+      if (!user) {
+        throw new Error('Autor não encontrado');
+      }
+
+      const authorId = user.id;
+
+      const news = await prisma.news.findMany({
+        where: {
+          authorId,
+        },
+        include: {
+          categories: true,
+        },
+      });
+
+      return {
+        user,
+        news,
+      };
     } catch (error) {
       throw new Error('Erro ao buscar o autor por nome de usuário');
     }
