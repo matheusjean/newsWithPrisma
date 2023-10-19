@@ -8,7 +8,7 @@ const routes = Router();
 
 routes.use('/login', sessionRouter);
 
-routes.use('/users', usersRouter);
+routes.use('/author', usersRouter);
 
 routes.use('/news', newsRouter);
 
