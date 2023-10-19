@@ -1,17 +1,24 @@
 import { Request, Response } from 'express';
 import CreateSessionsService from '../service/CreateSessionService';
 
-export default class SessionsController {
+class SessionsController {
   public async create(req: Request, res: Response): Promise<Response> {
-    const { email, password } = req.body;
+    try {
+      const { email, password } = req.body;
 
-    const createSession = new CreateSessionsService();
+      const createSession = new CreateSessionsService();
 
-    const { user, token } = await createSession.execute({
-      email,
-      password,
-    });
+      const { user, token } = await createSession.execute({
+        email,
+        password,
+      });
 
-    return res.json({ user, token });
+      return res.json({ user, token });
+    } catch (error) {
+      console.error('Erro ao criar sessão:', error);
+      return res.status(401).json({ error: 'Falha na autenticação' });
+    }
   }
 }
+
+export default SessionsController;
