@@ -2,7 +2,7 @@ import { PrismaClient, User } from '@prisma/client/edge';
 import AppError from '@shared/errors/appError';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import authConfig from '@config/middleware/authConfig';
+import authConfig from '../../../config/middleware/authConfig';
 
 interface IRequest {
   email: string;

@@ -1,7 +1,7 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import NewsController from '../controllers/NewsController';
-import authenticateUser from '@config/middleware/auth2';
+import authenticateUser from '../../../config/middleware/auth2';
 
 const newsRouter = Router();
 const newsController = new NewsController();
