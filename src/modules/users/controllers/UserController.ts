@@ -33,10 +33,8 @@ export default class UsersController {
       const user = await findUserByUsernameService.execute(username);
 
       if (user) {
-        // Usuário encontrado
         return res.json(user);
       } else {
-        // Usuário não encontrado
         return res.status(404).json({ error: 'Usuário não encontrado' });
       }
     } catch (error) {
