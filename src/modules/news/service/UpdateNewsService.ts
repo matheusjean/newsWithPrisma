@@ -10,6 +10,7 @@ interface IRequest {
   text: string;
   image: string;
   link: string;
+  author: string;
   isActive: boolean;
   categoryIds?: string[];
   categoriesToRemove?: string[];
@@ -23,6 +24,7 @@ export default class UpdateNewsService {
     text,
     image,
     link,
+    author,
     isActive,
     categoryIds,
     categoriesToRemove,
@@ -90,6 +92,16 @@ export default class UpdateNewsService {
         isActive: isActive,
         categories: {
           connect: categoryIds?.map((categoryId) => ({ id: categoryId })) || [],
+        },
+      },
+      include: {
+        categories: true,
+        author: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+          },
         },
       },
     });

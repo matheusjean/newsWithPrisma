@@ -79,6 +79,7 @@ export default class NewsController {
       image,
       link,
       isActive,
+      author,
       categoryIds,
       categoriesToRemove,
     } = req.body;
@@ -97,6 +98,7 @@ export default class NewsController {
         isActive,
         categoryIds,
         categoriesToRemove,
+        author,
       });
 
       return res.json(news);
