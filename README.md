@@ -8,7 +8,6 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 </p>
 
 ## 🚀 Sobre o Projeto
@@ -20,7 +19,6 @@ Projeto consiste em uma api para que possa ser gerenciado as notícias criadas p
 - **[NodeJS](https://nodejs.org/en/docs/)**
 - **[Express](https://expressjs.com/)**
 - **[Postgres](https://www.postgresql.org/)**
-- **[Docker](https://www.docker.com/)**
 
 ## 🔎 Comandos
 
@@ -64,22 +62,10 @@ $ yarn dev
 # Acesse http://localhost:3333/api-docs
 
 ```
-
-### 🏦 Rodando a Aplicação Docker
-
-```bash
-# Docker em desenvolvimento
-$ docker-compose up -d
-
-# O servidor inciará na porta:3333
-
-```
 ### 🏦 Rodando as Migrations
 
 ```bash
 # Typeorm em desenvolvimento
-$ yarn typeorm migration:run
-
-# >>> Criar o banco "noticias" antes de rodar as migrations
+$ yarn prisma migration dev
 
 ```
