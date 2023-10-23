@@ -27,12 +27,10 @@ export default class CreateNewsService {
     categoryIds,
     isHighlighted,
   }: IRequest): Promise<News> {
-    // Defina o valor padrão de isHighlighted como 0 se não estiver presente ou for indefinido
     if (isHighlighted === undefined) {
       isHighlighted = 0;
     }
 
-    // Encontre e remova a notícia anterior com o mesmo valor de isHighlighted
     const existingHighlightedNews = await prisma.news.findFirst({
       where: {
         isHighlighted: isHighlighted,
@@ -40,7 +38,6 @@ export default class CreateNewsService {
     });
 
     if (existingHighlightedNews) {
-      // Remova o valor de isHighlighted da notícia anterior definindo-o como 0
       await prisma.news.update({
         where: { id: existingHighlightedNews.id },
         data: {
