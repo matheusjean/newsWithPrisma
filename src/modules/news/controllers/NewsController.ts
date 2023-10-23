@@ -42,7 +42,16 @@ export default class NewsController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { hat, title, text, image, link, isActive, categoryIds } = req.body;
+    const {
+      hat,
+      title,
+      text,
+      image,
+      link,
+      isActive,
+      categoryIds,
+      isHighlighted,
+    } = req.body;
 
     const userId = req.user.id;
 
@@ -62,6 +71,7 @@ export default class NewsController {
         link,
         isActive,
         categoryIds,
+        isHighlighted,
       });
 
       return res.json(news);

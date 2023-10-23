@@ -17,6 +17,7 @@ model News {
   image      String
   link       String
   isActive   Boolean
+  isHighlighted Int?
   created_at DateTime    @default(now()) @map("created_at")
   updated_at DateTime    @updatedAt @map("updated_at")
   categories  Category[]

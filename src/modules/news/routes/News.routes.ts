@@ -38,6 +38,7 @@ newsRouter.post(
       image: Joi.string().required(),
       link: Joi.string().required(),
       isActive: Joi.boolean().required(),
+      isHighlighted: Joi.number().valid(1, 2, 3).optional(),
       categoryIds: Joi.array().items(Joi.string()),
     },
   }),
