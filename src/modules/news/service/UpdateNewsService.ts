@@ -12,6 +12,7 @@ interface IRequest {
   link: string;
   author: string;
   isActive: boolean;
+  isHighlighted: number;
   categoryIds?: string[];
   categoriesToRemove?: string[];
 }
@@ -26,9 +27,24 @@ export default class UpdateNewsService {
     link,
     author,
     isActive,
+    isHighlighted,
     categoryIds,
     categoriesToRemove,
   }: IRequest): Promise<News> {
+    async function clearHighlightedNewsExceptCurrent() {
+      await prisma.news.updateMany({
+        where: {
+          NOT: {
+            id: id,
+          },
+          isHighlighted: isHighlighted,
+        },
+        data: {
+          isHighlighted: 0,
+        },
+      });
+    }
+
     const news = await prisma.news.findUnique({
       where: {
         id: id,
@@ -79,6 +95,8 @@ export default class UpdateNewsService {
       });
     }
 
+    await clearHighlightedNewsExceptCurrent();
+
     const updatedNews = await prisma.news.update({
       where: {
         id: id,
@@ -90,6 +108,7 @@ export default class UpdateNewsService {
         image: image,
         link: link,
         isActive: isActive,
+        isHighlighted: isHighlighted,
         categories: {
           connect: categoryIds?.map((categoryId) => ({ id: categoryId })) || [],
         },
