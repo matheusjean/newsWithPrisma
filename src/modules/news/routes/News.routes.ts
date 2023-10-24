@@ -55,6 +55,7 @@ newsRouter.put(
       image: Joi.string(),
       link: Joi.string(),
       isActive: Joi.boolean(),
+      isHighlighted: Joi.number().valid(1, 2, 3).optional(),
       categoryIds: Joi.array().items(Joi.string()),
       categoriesToRemove: Joi.array().items(Joi.string()),
     },
