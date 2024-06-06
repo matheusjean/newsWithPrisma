@@ -19,6 +19,7 @@ Projeto consiste em uma api para que possa ser gerenciado as notícias criadas p
 - **[NodeJS](https://nodejs.org/en/docs/)**
 - **[Express](https://expressjs.com/)**
 - **[Postgres](https://www.postgresql.org/)**
+- **[Prisma](https://https://www.prisma.io/)**
 
 ## 🔎 Comandos
 
